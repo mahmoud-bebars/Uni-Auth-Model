@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "c431bb99-9aa5-4a1a-b37f-f945aeff8e54",
+		"name": "Auth_System_Apis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sgin Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"\",\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"email\": \"\",\n    \"phone\": \"\",\n    \"password\": \"\",\n    \"confirmPassword\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/SginUp",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"SginUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"\",\n    \"password\":\"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/Login",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mail Verfiy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "barer //acessToken",
+						"type": "text"
+					},
+					{
+						"key": "userid",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"otp\": \"\",\n    \"Authorization\":\"barer //acessToken\",\n    \"userid\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/MailVerfiy",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"MailVerfiy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Auth",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true,
+					"user-agent": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "barer //accessToken",
+						"type": "text"
+					},
+					{
+						"key": "userid",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/Auth",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Tokens",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "refresh",
+						"value": "//refreshToken",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/Refresh",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log Out",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "refresh",
+						"value": "//refreshToken",
+						"type": "text"
+					},
+					{
+						"key": "authorization",
+						"value": "barer //accessToken",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/Logout",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password By Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/ResetPass",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"ResetPass"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Password",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "barer //accessToken",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"oldPassword\": \"\",\n    \"newPassword\": \"\",\n    \"confirmNewPassword\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/UpdatePass",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"UpdatePass"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,14 @@
+DATABASEHOST = 'localhost or the server url'
+DATABASEUSER = 'database user'
+DATABASEPASSWORD = 'database password'
+DATABASE = 'database name'
+
+JWT_SECRET = HS256
+JWT_REFRESH_SECRET = RS256
+JWT_EXPIRES_IN = 1d
+
+PORT = 5000 -> change it when you change port 
+
+MAIL_SERVER = Gmail
+MAIL_USER = 'try to create a developing email with low access for the apps'
+MAIL_PASS = 'email password'
