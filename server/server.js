@@ -54,7 +54,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(
   session({
     key: 'userid',
-    secret: 'AUTH-SECRET',
+    secret: 'FOLLOWU-SECRET',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -64,7 +64,7 @@ app.use(
 )
 
 // app routers apply handlers
-app.use('/', authRouter)
+app.use('/api', authRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

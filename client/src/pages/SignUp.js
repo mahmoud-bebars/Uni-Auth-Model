@@ -55,7 +55,7 @@ const SginUp = () => {
   // mail verfiy function handler
   const handleVerfiy = (e) => {
     e.preventDefault()
-    Axios.post(SERVER + '/MailVerfiy', {
+    Axios.post(SERVER + '/api/MailVerfiy', {
       authorization: accessToken,
       otp: otp,
     }).then((response) => {
@@ -82,7 +82,7 @@ const SginUp = () => {
   // sgin up function handler
   const handleSginUp = (e) => {
     e.preventDefault()
-    Axios.post(SERVER + '/SginUp', user).then(
+    Axios.post(SERVER + '/api/SginUp', user).then(
       (response) => {
         if (response.data.Auth === true) {
           setAlert({

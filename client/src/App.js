@@ -16,6 +16,7 @@ const Home = lazy(() => import('./pages/Home'))
 const Login = lazy(() => import('./pages/Login'))
 const SignUp = lazy(() => import('./pages/SignUp'))
 const NotFound = lazy(() => import('./pages/NotFound'))
+const View = lazy(() => import('./pages/view'))
 
 function App() {
   // distructure the user context to pass it through the entire application
@@ -38,6 +39,7 @@ function App() {
           <Header />
           <Routes>
             <Route exact path={ROUTES.HOME} element={<Home />} />
+            <Route exact path={ROUTES.HOME} element={<View />} />
             <Route exact path={ROUTES.LOGIN} element={<Login />} />
             <Route exact path={ROUTES.SIGN_UP} element={<SignUp />} />
             {isLogged ? (

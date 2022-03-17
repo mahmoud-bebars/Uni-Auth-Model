@@ -7,7 +7,7 @@ import { SERVER } from '../constants/serverUrl'
 
 const Login = () => {
   const [forgetPassword, setForgetPassword] = useState(false)
-  const [user, setUser] = useState({ email: '', password: '' })
+  const [user, setUser] = useState({ phone: '', password: '' })
   const [alert, setAlert] = useState({
     show: false,
     varient: '',
@@ -35,7 +35,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    Axios.post(SERVER + '/Login', user).then(
+    Axios.post(SERVER + '/api/Login', user).then(
       (response) => {
         if (response.data.Auth === true) {
           setAlert({
@@ -70,7 +70,7 @@ const Login = () => {
   const handleForget = (e) => {
     e.preventDefault()
 
-    Axios.post(SERVER + '/ResetPass', user.email).then(
+    Axios.post(SERVER + '/ResetPass', user.phone).then(
       (response) => {
         if (response.data.reset === true) {
           setAlert({
@@ -123,13 +123,13 @@ const Login = () => {
                   </label>
                   <input
                     id='email-address'
-                    name='email'
-                    type='email'
-                    value={user.email}
+                    name='phone'
+                    type='telephone'
+                    value={user.phone}
                     onChange={handleChange}
                     required
                     className='edit-input'
-                    placeholder='Email address'
+                    placeholder='phone number'
                   />
                 </div>
                 <div>
