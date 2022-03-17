@@ -11,7 +11,7 @@ const GetUserInfo = () => {
     const request = {
       headers: { authorization: authorization, userid: userid },
     }
-    Axios.get(SERVER + '/api/UserInfo', request).then((response) => {
+    Axios.get(SERVER + '/UserInfo', request).then((response) => {
       if (response.data.Auth === true) {
         setUserInfo(response.data)
       } else if (response.data.Auth === false) {

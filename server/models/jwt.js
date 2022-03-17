@@ -1,5 +1,5 @@
 // db importing
-const db = require('../../config')
+const db = require('../config')
 
 // dotenv import
 const dotenv = require('dotenv')

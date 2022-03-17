@@ -1,12 +1,9 @@
 // db importing
-const db = require('../../config')
+const db = require('../config')
 
 // jwt model import
 const jwtM = require('./jwt')
-const userPic = require('../profileControl/avatar')
-const userInfo = require('../profileControl/editInfo')
-const userSocial = require('../profileControl/socialControl')
-const userTheme = require('../profileControl/themeControl')
+
 // jwt decoder package import
 const jwtDecode = require('jwt-decode')
 
@@ -37,48 +34,54 @@ exports.auth = (req, res) => {
 // POST user Sgin Up
 exports.sginup = (req, res) => {
   // data req.body
-  const user = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    username: req.body.username,
-    email: req.body.email,
-    phone: req.body.phone,
-    password: req.body.password,
-    confirmPassword: req.body.confirmPassword,
-  }
-
-  const sginProcess = (user) => {
-    // generate random userid
-    const userid = Id()
-    // compare passwords
-    if (user.password !== user.confirmPassword) {
+  const {
+    firstName,
+    lastName,
+    username,
+    email,
+    phone,
+    password,
+    confirmPassword,
+  } = req.body
+  // generate random userid
+  const userid = Id()
+  // verify email isn't taken & compare passwords
+  const verifyEmailSQl = 'SELECT email FROM users WHERE email = ?'
+  db.start.query(verifyEmailSQl, [email], (error, results) => {
+    if (error) {
+      console.log(error)
+    }
+    if (results.length > 0) {
+      res.send({ Auth: false, message: 'That Email has been taken' })
+      console.log('email is taken')
+      // compare passwords
+    } else if (password !== confirmPassword) {
       res.send({ Auth: false, message: 'Passwords do not match' })
     } else {
       // hashing user password to store in db
-      bcrypt.hash(user.password, 10, (err, hash) => {
+      bcrypt.hash(password, 10, (err, hash) => {
         // inserting user register data to db
         const sql = 'INSERT INTO users SET ?'
         db.start.query(
           sql,
           {
-            userid: userid,
-            username: user.username,
-            email: user.email === '' ? null : user.email,
-            phone: user.phone,
+            userid,
+            firstName,
+            lastName,
+            username,
+            email,
+            phone,
             password: hash,
+            emailVerfied: false,
           },
-          (err, results) => {
+          (err, result) => {
             if (err) {
               // A problem happend while storing user's data and user haven't sgin up
               res.send(err)
               console.log(err)
             } else {
               // data stored and starting to create the accessToken to send it in th response
-              const result = {
-                userid: userid,
-                username: user.username,
-                phone: user.phone,
-              }
+              const result = { userid, username, email }
               // generate asscess Token for the user
               const accessToken = jwtM.generateAccessToken(result)
               const refreshToken = jwtM.generateRefreshToken(result)
@@ -86,21 +89,14 @@ exports.sginup = (req, res) => {
               refreshTokens.push(refreshToken)
               //store the token in the tokens table
               jwtM.storeAcessToken(accessToken, userid)
-              // inserting deafult user avatar row
-              userPic.createprofileAvatar(userid)
-              // inserting deafult user avatar row
-              userInfo.createUserInfoRow(userid)
-              // inserting deafult user socials row
-              userSocial.createSocialRow(userid)
-              // inserting deafult user theme row
-              userTheme.createUserThemeRow(userid)
+
               // create verfication code (otp)
               const otp = verifyMail.generateOTP()
               sendedOtps.push(otp)
               // create mailOptions to be sent to user
               const mailOptions = {
                 from: 'info@react.org',
-                to: user.email,
+                to: email,
                 subject: 'React Auth Email Verfication',
                 html: `<h1>please verfiy your mail </h1> <h5>enter this otp ${otp} in the verication code feild
                 </h5> <p>thanks for your sgining in</p>`,
@@ -108,53 +104,23 @@ exports.sginup = (req, res) => {
 
               // send verfication mail to the user
               verifyMail.mailVerfiy(mailOptions)
-
               // user has been registered Successfully
-              const response = {
+              res.json({
                 Auth: true,
-                username: user.username,
+                username: username,
                 userid: userid,
-                phone: user.phone,
-                accessToken: accessToken,
-                refreshToken: refreshToken,
+                email: email,
+                accessToken,
+                refreshToken,
                 message:
                   'You have Registered successfully, please verfiy your email',
-              }
+              })
 
-              console.log('New client Registered')
-              res.json(response)
+              console.log('user Registered')
             }
           }
         )
       })
-    }
-  }
-
-  // verify phone isn't taken
-  const verifyPhoneSQl = 'SELECT phone FROM users WHERE phone = ?'
-  db.start.query(verifyPhoneSQl, [user.phone], (error, results) => {
-    if (error) {
-      console.log(error)
-    }
-    if (results.length > 0) {
-      res.send({ Auth: false, message: 'That Phone has been taken' })
-    } else {
-      if (user.email !== '') {
-        // verify email isn't taken
-        const verifyEmailSQl = 'SELECT email FROM users WHERE email = ?'
-        db.start.query(verifyEmailSQl, [user.email], (error, results, next) => {
-          if (error) {
-            console.log(error)
-          }
-          if (results.length > 0) {
-            res.json({ Auth: false, message: 'That Email has been taken' })
-          } else {
-            sginProcess(user)
-          }
-        })
-      } else {
-        sginProcess(user)
-      }
     }
   })
 }
@@ -207,11 +173,11 @@ exports.mailVerfiy = (req, res) => {
 // POST user login
 exports.login = (req, res) => {
   // user login data from the request body
-  const { phone, password } = req.body
+  const { email, password } = req.body
 
-  // verify user existed in db by phone
-  const sql = 'SELECT * FROM users WHERE phone = ? '
-  db.start.query(sql, [phone], (err, result) => {
+  // verify user existed in db
+  const sql = 'SELECT * FROM users WHERE email = ? '
+  db.start.query(sql, [email], (err, result) => {
     if (err) {
       console.log(err)
       res.send({ err: err })
@@ -237,7 +203,6 @@ exports.login = (req, res) => {
             Auth: true,
             userid: user.userid,
             username: user.username,
-            phone: user.phone,
             email: user.email,
             accessToken,
             refreshToken,

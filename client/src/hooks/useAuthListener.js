@@ -11,7 +11,7 @@ const useAuthListener = () => {
     const request = {
       headers: { authorization: authorization, userid: userid },
     }
-    Axios.get(SERVER + '/api/Auth', request).then((response) => {
+    Axios.get(SERVER + '/Auth', request).then((response) => {
       if (response.data.Auth === true) {
         setUser(response.data)
         Axios.defaults.headers.common['authorization'] =

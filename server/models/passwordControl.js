@@ -1,5 +1,5 @@
 // db importing
-const db = require('../../config')
+const db = require('../config')
 
 // node mailer package importing
 const nodeMailer = require('nodemailer')
