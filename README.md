@@ -63,6 +63,302 @@ MAIL_PASS = 'email password'
 - in the server mailing section you can use your personal Gmail account to send the mails for testing but you need to Allow security option in Gmail called `Allow less secure apps` as i metion in the .env file setup
 ----------------------------------------------------------------
 
+Authentication Apis End-Points -->
+
+  = (POST) --> login --> localhost:5000/Login (body-data)
+
+  - send request Example :-
+
+  ```
+  {
+   "phone":"",
+   "password":""
+  }
+
+  ```
+
+  --> possible errors
+
+  - wrong password
+
+  ```
+  {
+   "Auth": false,
+   "message": "Wrong password, please try Again!"
+  }
+  ```
+
+  - user doesn't exist
+
+  ```
+  {
+    "Auth": false,
+    "message": "User Doesn't exisit"
+  }
+  ```
+
+  ---> sucsscefully loged in response example :-
+
+  ```
+  {
+    "Auth": true,
+    "userid": "JLz3mvIZSTtHIpe",
+    "username": "m.bebars",
+    "email": "mahmoud.bebars.me@gmail.com",
+    "type": "client",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJKTHozbXZJWlNUdEhJcGUiLCJlbWFpbCI6Im1haG1vdWQuYmViYXJzLm1lQGdtYWlsLmNvbSIsInR5cGUiOiJjbGllbnQiLCJpYXQiOjE2NDUyMTY0MjgsImV4cCI6MTY0NzgwODQyOH0._VXsNEro4ajdxZWQVeHCJ96YOt4X6FqYNOFkJayPTeM",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJKTHozbXZJWlNUdEhJcGUiLCJlbWFpbCI6Im1haG1vdWQuYmViYXJzLm1lQGdtYWlsLmNvbSIsInR5cGUiOiJjbGllbnQiLCJpYXQiOjE2NDUyMTY0Mjh9.EuY1ILlW1N2lx24Jn2f49irKXeWfNyGzBDRsDZ7HF4Y",
+    "message": "user loggedin"
+  }
+  ```
+
+= (POST) --> logout --> localhost:5000/Logout (header-data)
+
+- send request Example :-
+
+```
+{
+  headers: {
+   Authoritation: // accessToken
+   refresh: // refreshToken
+ }
+}
+
+```
+
+---> sucsscefully loged out response example :-
+
+```
+{
+  "auth": false,
+  "message": "You logged out successfully"
+}
+```
+
+= (GET) --> user Auth --> localhost:5000/Auth (header-data)
+
+- send request Example :-
+
+```
+{
+  headers: {
+   Authoritation: // accessToken
+ }
+}
+
+```
+
+--> possible errors
+
+- invaild token
+
+```
+{
+    "auth": false,
+    "message": "Token is invaild"
+}
+```
+
+---> sucsscefully Auth response example :-
+
+```
+{
+    "Auth": true,
+    "email": "mahmoud.bebars.me@gmail.com",
+    "userid": "JLz3mvIZSTtHIpe",
+    "type": "client",
+    "message": "this account is sgined up & verfied"
+}
+```
+
+= (POST) --> refresh Token --> localhost:5000/Refresh (header-data)
+
+- send request Example :-
+
+```
+{
+  headers: {
+   refresh: // refreshToken
+ }
+}
+
+```
+
+--> possible errors
+
+- inavild token
+
+```
+{
+    "Auth": false,
+    "message": "Refresh token isn't valid"
+}
+```
+
+---> sucsscefully refresh response example :-
+
+```
+{
+    "Auth": true,
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJKTHozbXZJWlNUdEhJcGUiLCJlbWFpbCI6Im1haG1vdWQuYmViYXJzLm1lQGdtYWlsLmNvbSIsInR5cGUiOiJjbGllbnQiLCJpYXQiOjE2NDUyMTcxNzYsImV4cCI6MTY0NzgwOTE3Nn0.SHS7yaKgL2iM68ENNK9lLDLUwtXpL2XyNdKxyhoHrEk",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJKTHozbXZJWlNUdEhJcGUiLCJlbWFpbCI6Im1haG1vdWQuYmViYXJzLm1lQGdtYWlsLmNvbSIsInR5cGUiOiJjbGllbnQiLCJpYXQiOjE2NDUyMTcxNzZ9.v48NBlZBms_UyPrd2jH2QHkiCSuvUgxblu74qv2pqtM",
+    "message": "Your token is Refreshed now & good to go"
+}
+```
+
+= (POST) --> client Sgin up --> llocalhost:5000/ClientSginUp (body-data)
+
+- send request Example :-
+
+```
+{
+    "username": "m.bebars",
+    "firstName": "mahmoud",
+    "lastName": "bebars",
+    "email": "mahmoud.bebars.me@gmail.com",
+    "phone": "01276800115",
+    "password": "12345",
+    "confirmPassword": "12345"
+
+}
+```
+
+--> possible errors
+
+- phone exists
+
+```
+{
+    "Auth": false,
+    "message": "That Phone has been taken"
+}
+```
+
+- email exist
+
+```
+{
+    "Auth": false,
+    "message": "That Email has been taken"
+}
+```
+
+- unmatch passwords
+
+```
+{
+    "Auth": false,
+    "message": "Passwords do not match"
+}
+```
+
+---> sucsscefully sgin up response example :-
+
+```
+{
+    "Auth": true,
+    "username": "m.bebars",
+    "userid": "hWU0CLDzMZRtc4t",
+    "email": "mahmoud.bebars.me@gmail.com",
+    "type": "client",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJoV1UwQ0xEek1aUnRjNHQiLCJlbWFpbCI6Im1haG1vdWQuYmViYXJzLm1lQGdtYWlsLmNvbSIsInR5cGUiOiJjbGllbnQiLCJpYXQiOjE2NDUyMTczODMsImV4cCI6MTY0NzgwOTM4M30.IJ4sytEYMQQ2E_TCC_adchhdd7b7TAF9QZRwcTRH5Ac",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJoV1UwQ0xEek1aUnRjNHQiLCJlbWFpbCI6Im1haG1vdWQuYmViYXJzLm1lQGdtYWlsLmNvbSIsInR5cGUiOiJjbGllbnQiLCJpYXQiOjE2NDUyMTczODN9.K01WkuEn-l2GiJ_49E4iuRlwZhy1bnNITpb9Wg_MpSc",
+    "message": "You have Registered successfully, please verfiy your email"
+}
+```
+
+= (POST) --> Mail verfiy --> localhost:5000/MailVerfiy (body-data)
+
+- send request example
+
+```
+{
+    "otp": "",
+    "Authorization":"barer //acessToken",
+    "userid": ""
+}
+```
+
+--> possible errors
+
+- inavild token
+
+```
+{
+    "auth": false,
+    "message": "Token is invaild"
+}
+```
+
+- invaild otp
+
+```
+{
+      verfiy: false,
+      message: 'the sended otp is invailed... please try again',
+    }
+```
+
+---> sucsscefully email verfied response example :-
+
+```
+  {
+    verfiy: true,
+    message: 'your email has been verfied enjoy our service',
+  }
+```
+
+= (POST) --> reset password by email --> localhost:5000/ResetPass (body-data)
+
+- send request example
+
+```
+{
+    "email": ""
+}
+```
+
+---> sucsscefully password reset response example :-
+
+```
+  {
+    reset: true,
+    message:
+      'We have send you a secured password log with it and then change it with one your remmeber it',
+  }
+```
+
+= (PUT) --> update password --> localhost:5000/UpdatePass (body-data)
+- send request example
+
+```
+{
+   "oldPassword": "",
+   "newPassword": "",
+   "confirmNewPassword": ""
+}
+```
+ --> possible errors
+
+ - password doesn't match
+ ```
+ {
+  changePass: false,
+  message: 'New Passwords do not match',
+ }
+ ```
+---> sucsscefully password reset response example :-
+
+```
+{
+  changePass: true,
+  message: 'Your password has been changed successfully',
+}
+```
+
+-----------------------------------------------------------
+
+
 ### Used Techs Reference:
 
 | #  | Technology                                      | Description                                             |
