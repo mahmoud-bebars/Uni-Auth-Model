@@ -36,8 +36,8 @@ DATABASEPASSWORD = 'db password'
 DATABASE = 'db name'
 
 JWT_SECRET = 'JWT secret' // commoly we use HS256
-,JWT_REFRESH_SECRET = 'JWT refresh secret' // commoly we use RS256
-,JWT_EXPIRES_IN = 'expriration  time' // see the jwt package docs for more info about that 
+JWT_REFRESH_SECRET = 'JWT refresh secret' // commoly we use RS256
+JWT_EXPIRES_IN = 'expriration  time' // see the jwt package docs for more info about that 
 
 PORT = 5000 // change it if you want to use another port
 
@@ -63,7 +63,7 @@ MAIL_PASS = 'email password'
 - in the server mailing section you can use your personal Gmail account to send the mails for testing but you need to Allow security option in Gmail called `Allow less secure apps` as i metion in the .env file setup
 ----------------------------------------------------------------
 
-Authentication Apis End-Points -->
+### Authentication Apis End-Points
 
   = (POST) --> login --> localhost:5000/Login (body-data)
 
