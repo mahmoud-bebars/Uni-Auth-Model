@@ -1,0 +1,8 @@
+./client/.env
+./client/node_modules
+./client/.gitignore
+
+./server/.env
+./srver/node_modules
+./client/.gitignore
+./client/.gitignore

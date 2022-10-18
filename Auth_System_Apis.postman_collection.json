@@ -1,0 +1,331 @@
+{
+	"info": {
+		"_postman_id": "5680616c-0c89-4a7d-8f95-8b4b71d6f22e",
+		"name": "Auth_System_Apis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16810473"
+	},
+	"item": [
+		{
+			"name": "Sgin Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"\",\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"email\": \"\",\n    \"phone\": \"\",\n    \"password\": \"\",\n    \"confirmPassword\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/SginUp",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"SginUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"m.bebars@icloud.com\",\n    \"password\":\"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/Login",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"Login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mail Verfiy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "barer //acessToken",
+						"type": "text"
+					},
+					{
+						"key": "userid",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"otp\": \"\",\n    \"Authorization\":\"barer //acessToken\",\n    \"userid\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/MailVerfiy",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"MailVerfiy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Verfiy",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true,
+					"user-agent": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "barer //Access Token",
+						"type": "text"
+					},
+					{
+						"key": "userid",
+						"value": "userid",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/Verfiy",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"Verfiy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Tokens",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "refresh",
+						"value": "//refreshToken",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/Refresh",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"Refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log Out",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "refresh",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJ0QTJWc2ViNlI2bWxYSUQiLCJlbWFpbCI6Im0uYmViYXJzQGljbG91ZC5jb20iLCJpYXQiOjE2NjYxMDgyMjh9.h-JX1uE6wVHBsC_8fB3jO3I8kco8H7KIQdv4dChUVVA",
+						"type": "text"
+					},
+					{
+						"key": "authorization",
+						"value": "barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJ0QTJWc2ViNlI2bWxYSUQiLCJlbWFpbCI6Im0uYmViYXJzQGljbG91ZC5jb20iLCJpYXQiOjE2NjYxMDgyMjgsImV4cCI6MTY2NjE5NDYyOH0.mqNTyMwWEauEJj9wTegQ6fW3kU1-5NjkhQyuRQWHukM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/Logout",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"Logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password By Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/ResetPass",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"ResetPass"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Password",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "barer //accessToken",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"oldPassword\": \"\",\n    \"newPassword\": \"\",\n    \"confirmNewPassword\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/UpdatePass",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"UpdatePass"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserInfo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "barer //accessToken",
+						"type": "text"
+					},
+					{
+						"key": "userid",
+						"value": "userid...",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userid\":\"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/users/UserInfo",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"UserInfo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
