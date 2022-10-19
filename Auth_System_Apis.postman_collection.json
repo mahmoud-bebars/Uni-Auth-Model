@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "5680616c-0c89-4a7d-8f95-8b4b71d6f22e",
 		"name": "Auth_System_Apis",
+		"description": "**OverView**\n\nThis Collaction of APIs is a starter for Any project as Authorization & Authentication System for any project...\n\n**Techs Used for This APIs**\n\n- For simplity I use NodeJs powerde By ExpressJs To init the Server & start working\n- For DataBase Mysql is Choosed for that Beacuse it's more simple & scalable But we can switch to Postgres Also or with some updates Mongo can be used also\n    \n\n**Apis Plan**\n\nlet's walk our user through The system..\n\n- 1st Let's create A User in the Data Base `POST Create User` API **(SginUp)**\n- 2nd verfiy the email entered is real & holded by the User By `POST Mail Verfiy` API **(MailVerfiy)**\n- 3rd verfiy this is our Registered user `GET Auth Verfiy` API **(Verfiy)**\n- 4th show the user his data which entered in Registration with `GET User Info` API **(UserInfo)**\n- 5th Maybe user return tomorrow & enter Agin with `POST Login` API **(Login)**\n- 6th Maybe be user forgets his mail & want to reset it & that's done by `POST Reset Password By Email` API **(ResetPass)**\n- 7th Once user reset password He/She needs to update it & that's done with `PUT Update Password` API **(UpdatePass)**\n- 8th user also wants to log out for any reason & can be done by `POST Log Out` API **(LogOut)**\n- 9th & last for some reasons we need to keep checking the user Token & refresh it from time to time & this Done by `POST Refresh Token` API **(Refresh)**\n\n\n**Open Source Code**\ncheck Github Repo from [Here](https://github.com/mahmoud-bebars/Uni-Auth-Model)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "16810473"
 	},
@@ -32,37 +33,8 @@
 						"auth",
 						"SginUp"
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"email\":\"m.bebars@icloud.com\",\n    \"password\":\"12345\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
 				},
-				"url": {
-					"raw": "localhost:5000/api/v1/auth/Login",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1",
-						"auth",
-						"Login"
-					]
-				}
+				"description": "Create User & give Access & Refresh Tokens with User ID in the Response"
 			},
 			"response": []
 		},
@@ -103,7 +75,8 @@
 						"auth",
 						"MailVerfiy"
 					]
-				}
+				},
+				"description": "Verfiy User Email with Otp sended with the Registration API & check email here by sending the system to verfiy it."
 			},
 			"response": []
 		},
@@ -154,132 +127,8 @@
 						"auth",
 						"Verfiy"
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Refresh Tokens",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "refresh",
-						"value": "//refreshToken",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "localhost:5000/api/v1/auth/Refresh",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1",
-						"auth",
-						"Refresh"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Log Out",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "refresh",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJ0QTJWc2ViNlI2bWxYSUQiLCJlbWFpbCI6Im0uYmViYXJzQGljbG91ZC5jb20iLCJpYXQiOjE2NjYxMDgyMjh9.h-JX1uE6wVHBsC_8fB3jO3I8kco8H7KIQdv4dChUVVA",
-						"type": "text"
-					},
-					{
-						"key": "authorization",
-						"value": "barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJ0QTJWc2ViNlI2bWxYSUQiLCJlbWFpbCI6Im0uYmViYXJzQGljbG91ZC5jb20iLCJpYXQiOjE2NjYxMDgyMjgsImV4cCI6MTY2NjE5NDYyOH0.mqNTyMwWEauEJj9wTegQ6fW3kU1-5NjkhQyuRQWHukM",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "localhost:5000/api/v1/auth/Logout",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1",
-						"auth",
-						"Logout"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Reset Password By Email",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"email\": \"\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
 				},
-				"url": {
-					"raw": "localhost:5000/api/v1/auth/ResetPass",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1",
-						"auth",
-						"ResetPass"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update Password",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "authorization",
-						"value": "barer //accessToken",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"oldPassword\": \"\",\n    \"newPassword\": \"\",\n    \"confirmNewPassword\": \"\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:5000/api/v1/auth/UpdatePass",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1",
-						"auth",
-						"UpdatePass"
-					]
-				}
+				"description": "Verfiy User Authortaion & responed with auth true"
 			},
 			"response": []
 		},
@@ -323,7 +172,168 @@
 						"users",
 						"UserInfo"
 					]
-				}
+				},
+				"description": "send user the Registerd Info & that can be edited any time in the API Response"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"m.bebars@icloud.com\",\n    \"password\":\"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/Login",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"Login"
+					]
+				},
+				"description": "Log User to the system"
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password By Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/ResetPass",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"ResetPass"
+					]
+				},
+				"description": "Reset Password with Email"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Password",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "barer //accessToken",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"oldPassword\": \"\",\n    \"newPassword\": \"\",\n    \"confirmNewPassword\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/UpdatePass",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"UpdatePass"
+					]
+				},
+				"description": "Update Password by entering Old, New & confrim New Password"
+			},
+			"response": []
+		},
+		{
+			"name": "Log Out",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "refresh",
+						"value": "// Refrseh Token",
+						"type": "text"
+					},
+					{
+						"key": "authorization",
+						"value": "barer // Access Token",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/Logout",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"Logout"
+					]
+				},
+				"description": "Log User Out of the system"
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Tokens",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "refresh",
+						"value": "//refreshToken",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/api/v1/auth/Refresh",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"Refresh"
+					]
+				},
+				"description": "Refresh Tokens For the user"
 			},
 			"response": []
 		}
